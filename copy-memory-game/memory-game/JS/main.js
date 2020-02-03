@@ -26,6 +26,7 @@ function checkForMatch ()
 {	
 if (cardsInPlay.length === 2) 
 	{
+		this.setAttribute(cards[cardId].cardImage);
 		if (cardsInPlay[0] === cardsInPlay[1])
 		{
 			console.log ("You found a match!");
@@ -37,14 +38,27 @@ if (cardsInPlay.length === 2)
 	}
 }
 
-function flipCard (cardID) 
+function flipCard (cardElement) 
 {
-console.log ("user flipped " + cards[cardID].rank) //identifies card user clicks
-cardsInPlay.push (cards[cardID].rank)
-console.log (cards[cardID].suit) //log the suit of the card to console
-console.log (cards[cardID].cardImage) //log the image of the card to console
-checkForMatch ()
+	this.getAttribute('cardID');
+	console.log ("user flipped " + cards[cardID].rank) //identifies card user clicks
+	cardsInPlay.push (cards[cardID].rank)
+	console.log (cards[cardID].suit) //log the suit of the card to console
+	console.log (cards[cardID].cardImage) //log the image of the card to console
+	checkForMatch ()
 }
-flipCard (0)
-flipCard (2)
+
+function createBoard () // creates the game board
+{
+	for (let i = 0; i < cards; i++) //loops through cards array
+	{
+		let cardElement = document.createElement('img');
+		cardElement.setAttribute("images/back.png"); //this creates the card on the board
+		cardElement.setAttribute(i); //track the cards
+		cardElement.addEventListener('click', flipCard); //flips card on click
+		game-board.appendChild(cardElement);
+	}
+}
+
+createBoard
 
